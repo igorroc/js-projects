@@ -1,0 +1,243 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+	font-family: "Montserrat", sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	position: relative;
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	background: linear-gradient(to right, #232323, #202020);
+}
+
+#modal {
+	position: relative;
+	max-width: max-content;
+	width: 70%;
+	background: #151515;
+	border-radius: 10px;
+	padding: 50px 70px;
+
+	box-shadow: 0 2px 1px rgba(0, 0, 0, 0.09), 0 4px 2px rgba(0, 0, 0, 0.09),
+		0 8px 4px rgba(0, 0, 0, 0.09), 0 16px 8px rgba(0, 0, 0, 0.09),
+		0 32px 16px rgba(0, 0, 0, 0.09);
+}
+
+#modal.search form {
+	display: block;
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
+	max-width: 300px;
+	color: white;
+}
+
+#modal.search form label {
+	font-size: 1.2em;
+	font-weight: 500;
+	text-align: center;
+}
+
+#modal form {
+	display: none;
+}
+
+#modal input {
+	background: none;
+	outline: none;
+	border: none;
+	border-bottom: 1px #fffa solid;
+	color: white;
+	font-size: 1em;
+}
+
+#user {
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: 30px;
+}
+
+#user .imagem {
+	width: 200px;
+}
+
+#user .imagem img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+#user a {
+	font-size: 2em;
+	color: white;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+#user .content {
+	width: 100%;
+	max-width: 470px;
+	color: white;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+#user .content .buttons {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 30px;
+}
+
+#user .content .buttons .card {
+	background: #fff2;
+	padding: 10px 30px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	border-radius: 10px;
+}
+
+#user .content .buttons .card span {
+	opacity: 0.7;
+}
+
+#user .content .buttons .card p {
+	font-weight: bold;
+	font-size: 1.4em;
+}
+
+#modal.search #user,
+#modal.search > .iconify {
+	display: none;
+}
+
+#modal > .iconify {
+	position: absolute;
+	font-size: 3em;
+	top: 0;
+	right: 0;
+	color: #d34935aa;
+
+	cursor: pointer;
+
+	transition: color 300ms ease-out;
+}
+
+#modal > .iconify:hover {
+	color: #d34935;
+}
+
+#popupErro {
+	position: absolute;
+	bottom: 5em;
+	right: 5em;
+	height: max-content;
+	padding: 20px 50px 20px 30px;
+	background: linear-gradient(#fff, #fafafa);
+	border-radius: 10px;
+	display: flex;
+	align-items: center;
+	gap: 2em;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
+		0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07),
+		0 16px 32px rgba(0, 0, 0, 0.07), 0 32px 64px rgba(0, 0, 0, 0.07);
+	opacity: 0;
+	overflow: hidden;
+}
+
+.appear {
+	animation: appear 600ms ease-in-out forwards;
+}
+
+.disappear {
+	animation: disappear 800ms ease-in-out forwards;
+}
+
+#popupErro::before {
+	content: "!";
+	width: 2em;
+	height: 2em;
+	min-width: 2em;
+	min-height: 2em;
+	font-size: 2em;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	background: #d34935;
+	color: white;
+	border-radius: 100%;
+}
+
+#popupErro::after {
+	content: "";
+	position: absolute;
+	top: 0px;
+	left: 0;
+	height: 5px;
+	width: 0;
+	background: #d34935;
+}
+
+.appear::after {
+	animation: load 5s 1s ease-in-out forwards;
+}
+
+.disappear::after {
+	width: 100%;
+	animation: none;
+}
+
+#popupErro h1 {
+	font-size: 2em;
+	color: #d34935;
+}
+
+#popupErro p {
+	font-size: 1em;
+}
+
+@keyframes appear {
+	from {
+		transform: translateX(200%);
+		opacity: 0;
+	}
+	to {
+		transform: translateX(0);
+		opacity: 1;
+	}
+}
+
+@keyframes disappear {
+	from {
+		transform: translateY(0);
+		opacity: 1;
+	}
+	to {
+		transform: translateY(100%);
+		opacity: 0;
+	}
+}
+
+@keyframes load {
+	from {
+		width: 0%;
+	}
+	to {
+		width: 100%;
+	}
+}
