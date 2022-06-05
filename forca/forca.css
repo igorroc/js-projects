@@ -1,0 +1,89 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+	font-family: "Montserrat", sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	position: relative;
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	gap: 50px;
+
+	background: linear-gradient(to right, #232323, #202020);
+}
+
+#word,
+#fails,
+#rights,
+#hints {
+	display: flex;
+	gap: 1em;
+}
+
+#word .letterSlot {
+	width: 1em;
+	height: 1.5em;
+	border-bottom: 2px solid #fffa;
+	color: white;
+	font-size: 2em;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#fails .letterSlot,
+#rights .letterSlot {
+	width: 1.5em;
+	height: 1.5em;
+	font-size: 2em;
+	color: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#fails .letterSlot {
+	background: rgb(164, 36, 36);
+}
+
+#rights .letterSlot {
+	background: rgb(36, 164, 60);
+}
+
+form,
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	color: #fff5;
+	font-size: 1.2em;
+}
+
+form input {
+	background: none;
+	outline: none;
+	border: none;
+	border-bottom: 2px solid #fffa;
+	height: 2em;
+	width: 5ch;
+	color: #fff;
+	font-size: 1em;
+	text-align: center;
+}
+
+#hints .iconify {
+	color: white;
+	font-size: 2em;
+	cursor: pointer;
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Forca</title>
+		<link rel="stylesheet" href="forca.css" />
+		<script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+	</head>
+	<body>
+		<div id="fails"></div>
+		<div class="container">
+			<p>Word to discover:</p>
+			<div id="word"></div>
+		</div>
+		<form onsubmit="checkLetter(event)">
+			<label>Type here:</label>
+			<input type="text" maxlength="1" />
+		</form>
+		<div id="rights"></div>
+		<div id="hints">
+			<span
+				class="iconify"
+				data-icon="fa:lightbulb-o"
+				onclick="showHint()"
+			></span>
+		</div>
+
+		<script src="forca.js"></script>
+	</body>
+</html>
