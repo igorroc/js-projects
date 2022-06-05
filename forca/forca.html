@@ -11,11 +11,11 @@
 	<body>
 		<div id="fails"></div>
 		<div class="container">
-			<p>Word to discover:</p>
+			<p>Palavra:</p>
 			<div id="word"></div>
 		</div>
 		<form onsubmit="checkLetter(event)">
-			<label>Type here:</label>
+			<label>Digite aqui:</label>
 			<input type="text" maxlength="1" />
 		</form>
 		<div id="rights"></div>
@@ -24,6 +24,11 @@
 				class="iconify"
 				data-icon="fa:lightbulb-o"
 				onclick="showHint()"
+			></span>
+			<span
+				class="iconify"
+				data-icon="fa:refresh"
+				onclick="reload()"
 			></span>
 		</div>
 

@@ -1,13 +1,13 @@
-import dictionary from "https://gist.githubusercontent.com/stavarengo/5d07112537f260e982b4309178d253b4/raw/e5925d94c84d277f76eee41115ac96afd24737a1/brazilian-synonyms.json"
-
 const maxLives = 5
 const placeholder = document.querySelector("#word")
 const fails = document.querySelector("#fails")
 const rights = document.querySelector("#rights")
 const hints = document.querySelector("#hints")
+const input = document.querySelector("form input")
 
 var config = {
 	palavra: "",
+	palavraLimpa: "",
 	dica: [],
 }
 
@@ -25,14 +25,15 @@ function checkLetter(event) {
 
 	event.target[0].value = ""
 
-	if (wrongLetters.includes(letter) || wrongLetters.includes(letter)) {
-		return console.log("Voce ja tentou essa letra")
+	if (wrongLetters.includes(letter) || rightLetters.includes(letter)) {
+		return
 	}
 
 	let achou = false
 	for (let i = 0; i < config.palavra.length; i++) {
-		if (letter == config.palavra[i]) {
-			placeholder.children[i].innerHTML = letter
+		if (letter == config.palavraLimpa[i]) {
+			placeholder.children[i].innerHTML = config.palavra[i]
+
 			achou = true
 			qtdRights++
 		}
@@ -46,50 +47,71 @@ function checkLetter(event) {
 	}
 
 	if (wrongLetters.length >= maxLives) {
-		alert("Você perdeu!")
 		for (let i = 0; i < config.palavra.length; i++) {
 			placeholder.children[i].innerHTML = config.palavra[i]
 		}
+		setTimeout(() => {
+			alert("Você perdeu!")
+		}, 200)
 	}
 	if (qtdRights >= config.palavra.length) {
-		alert("Você ganhou!")
+		setTimeout(() => {
+			alert("Você ganhou!")
+		}, 200)
 	}
 }
 
 async function randomWord(config) {
-	const options = {
-		method: "GET",
-		headers: {
-			"X-RapidAPI-Host": "lexicala1.p.rapidapi.com",
-			"X-RapidAPI-Key":
-				"11f83973f4msh71b29aa939e03e2p1f740cjsnc5371152b08e",
-		},
-	}
+	await fetch("https://api.dicionario-aberto.net/random")
+		.then((data) => data.json())
+		.then(async (data) => {
+			config.palavra = await data.word
 
-	let [word, hint] = await fetch(
-		"https://lexicala1.p.rapidapi.com/search?language=br&sample=1",
-		options
-	)
-		.then((response) => response.json())
-		.then(async (response) => {
-			console.log(response)
-			let palavra = await response.results[0].headword.text
-			let type = await response.results[0].headword.pos
-			let aux = await response.results[0].senses
-			let hint = []
-			aux.forEach((el) => hint.push(el.definition))
-			return [palavra, [type, ...hint]]
+			for (let i = 0; i < config.palavra.length; i++) {
+				if (config.palavra[i] == "ç") {
+					config.palavraLimpa += "c"
+				} else if (
+					config.palavra[i] == "á" ||
+					config.palavra[i] == "ã" ||
+					config.palavra[i] == "â"
+				) {
+					config.palavraLimpa += "a"
+				} else if (
+					config.palavra[i] == "é" ||
+					config.palavra[i] == "ê"
+				) {
+					config.palavraLimpa += "e"
+				} else if (config.palavra[i] == "í") {
+					config.palavraLimpa += "i"
+				} else if (
+					config.palavra[i] == "õ" ||
+					config.palavra[i] == "ó"
+				) {
+					config.palavraLimpa += "o"
+				} else if (config.palavra[i] == "ú") {
+					config.palavraLimpa += "u"
+				} else {
+					config.palavraLimpa += config.palavra[i]
+				}
+			}
 		})
-		.catch((err) => console.error(err))
 
-	console.log(word, hint)
-	config.palavra = word
-	config.dica = hint
 	for (let i = 0; i < config.palavra.length; i++) {
 		placeholder.innerHTML += "<div class='letterSlot'></div>"
 	}
+
+	input.focus()
 }
 
-function showHint(){
-    hints += `<div class='hint'>${config.hint[dicasDadas++]}</div>`
+async function showHint() {
+	await fetch(`https://api.dicionario-aberto.net/near/${config.palavra}`)
+		.then((data) => data.json())
+		.then(async (data) => {
+			console.log(data)
+		})
+	// hints += `<div class='hint'>${config.hint[dicasDadas++]}</div>`
+}
+
+function reload() {
+	document.location.reload(true)
 }
