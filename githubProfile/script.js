@@ -49,18 +49,18 @@ function searchUser(ev) {
 					${data.bio ? `<p>${data.bio}</p>` : ""}
 				
 					<div class="buttons">
-						<div class="card">
+						<a class="card">
 							<span>Gists</span>
 							<p>${data.public_gists}</p>
-						</div>
-						<div class="card">
+						</a>
+						<a class="card" href="${data.html_url}?tab=repositories" target="_blank">
 							<span>Repos</span>
 							<p>${data.public_repos}</p>
-						</div>
-						<div class="card">
+						</a>
+						<a class="card" href="${data.html_url}?tab=followers" target="_blank">
 							<span>Followers</span>
 							<p>${data.followers}</p>
-						</div>
+						</a>
 					</div>
 					<div class="links">
 						<div class="link">
